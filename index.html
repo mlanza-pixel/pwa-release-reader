@@ -207,6 +207,82 @@
     </div>
   </div>
 
+  <!-- Print dialog overlay (custom, with page-range selector) -->
+  <div class="print-overlay" id="printOverlay" style="display:none;">
+    <div class="print-modal" onclick="event.stopPropagation()">
+      <div class="print-header">
+        <h2>Print / Save as PDF</h2>
+        <button class="icon-btn" id="printClose" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="6" y1="18" x2="18" y2="6"/>
+          </svg>
+        </button>
+      </div>
+      <div class="print-body">
+        <div class="print-section">
+          <div class="print-section-title">What would you like to print?</div>
+          <label class="print-radio-row">
+            <input type="radio" name="printScope" value="current" checked>
+            <div>
+              <div class="print-radio-title">Current chapter only</div>
+              <div class="print-radio-desc" id="printCurrentTitle">— Loading… —</div>
+            </div>
+          </label>
+          <label class="print-radio-row">
+            <input type="radio" name="printScope" value="all">
+            <div>
+              <div class="print-radio-title">Entire book (all <span id="printTotalChapters">—</span> chapters)</div>
+              <div class="print-radio-desc">Generates a long PDF — ~300 pages. May take 30–60 seconds to render.</div>
+            </div>
+          </label>
+          <label class="print-radio-row">
+            <input type="radio" name="printScope" value="range">
+            <div>
+              <div class="print-radio-title">Chapter range (from…to)</div>
+              <div class="print-radio-desc">Pick a starting and ending chapter to print a contiguous range.</div>
+            </div>
+          </label>
+          <div class="print-range-row" id="printRangeRow" style="display:none;">
+            <div>
+              <label for="printFrom">From:</label>
+              <select id="printFrom"></select>
+            </div>
+            <div>
+              <label for="printTo">To:</label>
+              <select id="printTo"></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="print-section">
+          <div class="print-section-title">Options</div>
+          <label class="print-checkbox-row">
+            <input type="checkbox" id="printIncludeCover" checked>
+            <div>Include cover page (recommended)</div>
+          </label>
+          <label class="print-checkbox-row">
+            <input type="checkbox" id="printIncludeToc">
+            <div>Include table of contents (recommended for full book)</div>
+          </label>
+          <label class="print-checkbox-row">
+            <input type="checkbox" id="printDarkMode">
+            <div>Use dark mode styling (uses more ink — not recommended)</div>
+          </label>
+        </div>
+
+        <div class="print-actions">
+          <button class="btn btn-secondary" id="printCancel">Cancel</button>
+          <button class="btn btn-primary" id="printConfirm">Print / Save as PDF</button>
+        </div>
+
+        <div class="print-hint">
+          💡 <strong>Tip:</strong> To save as PDF instead of printing to paper, choose "Save as PDF" as the destination in your browser's print dialog (next step).
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="js/search.js" defer></script>
   <script src="js/app.js" defer></script>

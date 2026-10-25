@@ -1088,3 +1088,378 @@ a.toc-part-header.active .toc-part-tag {
     background: transparent;
   }
 }
+
+/* ---------- Cover & Welcome button — reloading state ---------- */
+/* When user clicks the Cover button, we clear cache and force-reload.
+   Show a spinner + "Reloading..." text so user knows what's happening. */
+.toc-link-cover {
+  position: relative;
+  transition: background 0.15s, color 0.15s, opacity 0.15s;
+}
+.toc-link-cover.reloading {
+  background: var(--navy) !important;
+  color: #FFFFFF !important;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.toc-link-cover.reloading::after {
+  content: "Reloading…";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--amber-light);
+}
+.toc-link-cover.reloading .toc-icon {
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Add a small hint badge to the Cover button so users know it also
+   clears cache (not just navigates) */
+.toc-link-cover::before {
+  content: "↻";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.6;
+  font-weight: 700;
+}
+.toc-link-cover.reloading::before { content: ""; }
+
+/* ---------- Print dialog ---------- */
+.print-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.print-modal {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 0;
+  max-width: 540px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+.print-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
+}
+.print-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+[data-theme="dark"] .print-header h2 { color: var(--amber-light); }
+.print-body {
+  padding: 20px 24px 24px;
+}
+.print-section {
+  margin-bottom: 20px;
+}
+.print-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.print-radio-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.print-radio-row:hover {
+  background: var(--bg-hover);
+  border-color: var(--navy);
+}
+.print-radio-row input[type="radio"] {
+  margin-top: 3px;
+  accent-color: var(--navy);
+}
+.print-radio-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.print-radio-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.print-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+.print-checkbox-row input[type="checkbox"] {
+  accent-color: var(--navy);
+}
+.print-range-row {
+  display: flex;
+  gap: 14px;
+  padding: 14px 12px;
+  background: var(--bg-soft);
+  border-radius: 8px;
+  margin-top: 8px;
+}
+.print-range-row > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.print-range-row label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.print-range-row select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+}
+.print-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+.print-actions .btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.print-actions .btn-secondary {
+  background: var(--bg-soft);
+  color: var(--text);
+  border-color: var(--border);
+}
+.print-actions .btn-secondary:hover { background: var(--bg-hover); }
+.print-actions .btn-primary {
+  background: var(--navy);
+  color: #FFFFFF;
+}
+.print-actions .btn-primary:hover { background: var(--navy-light); }
+.print-hint {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--amber-bg);
+  border-left: 4px solid var(--amber);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+.print-hint strong { color: var(--amber); }
+
+/* ---------- Book cover hero (web app cover page) ---------- */
+/* Mimics the PDF cover page: navy gradient with amber accents, big title,
+   stats grid, like a real book cover. */
+.book-cover-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 56px 48px 48px 56px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(27, 58, 92, 0.30);
+}
+/* Decorative "spine" on the left edge — like a book binding */
+.book-cover-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(180deg, var(--amber) 0%, var(--amber-light) 50%, var(--amber) 100%);
+  box-shadow: inset -2px 0 4px rgba(0,0,0,0.20);
+}
+.book-cover-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.book-cover-edition {
+  display: inline-block;
+  padding: 5px 14px;
+  background: var(--amber);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+.book-cover-title {
+  font-family: var(--font-serif);
+  font-size: 44px;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+}
+.book-cover-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--amber-light);
+  line-height: 1.4;
+  max-width: 620px;
+  margin: 0 auto 18px;
+}
+.book-cover-tagline {
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.book-cover-tagline-sub {
+  font-size: 13px;
+  color: #C7D2FE;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+.book-cover-divider {
+  width: 60%;
+  margin: 24px auto;
+  border: none;
+  border-top: 1px solid rgba(255, 213, 128, 0.40);
+}
+.book-cover-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 24px 0;
+}
+.book-cover-stat {
+  text-align: center;
+  padding: 14px 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+.book-cover-stat-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--amber-light);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.book-cover-stat-label {
+  font-size: 10px;
+  color: #C7D2FE;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+}
+.book-cover-author {
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.book-cover-updated {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 4px;
+}
+
+/* Intro paragraph below the cover hero */
+.book-cover-intro {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--amber);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+.book-cover-intro p {
+  margin-bottom: 14px;
+}
+.book-cover-intro p:last-child {
+  margin-bottom: 0;
+}
+.book-cover-intro strong {
+  color: var(--navy);
+}
+[data-theme="dark"] .book-cover-intro strong { color: var(--amber-light); }
+
+/* Responsive — stack the cover stats on smaller screens */
+@media (max-width: 768px) {
+  .book-cover-hero { padding: 36px 24px 32px 32px; }
+  .book-cover-title { font-size: 32px; }
+  .book-cover-subtitle { font-size: 14px; }
+  .book-cover-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .book-cover-stat-num { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+  .book-cover-hero { padding: 28px 18px 24px 24px; border-radius: 12px; }
+  .book-cover-title { font-size: 26px; }
+  .book-cover-stats { grid-template-columns: repeat(2, 1fr); }
+  .book-cover-intro { padding: 18px 20px; font-size: 14px; }
+}
+
+/* Print — keep the cover page clean */
+@media print {
+  .book-cover-hero {
+    page-break-after: always;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

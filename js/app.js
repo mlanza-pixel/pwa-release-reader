@@ -57,6 +57,19 @@
     metaEdition: $('#metaEdition'),
     shortcutsOverlay: $('#shortcutsOverlay'),
     shortcutsClose: $('#shortcutsClose'),
+    // Print dialog
+    printOverlay: $('#printOverlay'),
+    printClose: $('#printClose'),
+    printCancel: $('#printCancel'),
+    printConfirm: $('#printConfirm'),
+    printCurrentTitle: $('#printCurrentTitle'),
+    printTotalChapters: $('#printTotalChapters'),
+    printRangeRow: $('#printRangeRow'),
+    printFrom: $('#printFrom'),
+    printTo: $('#printTo'),
+    printIncludeCover: $('#printIncludeCover'),
+    printIncludeToc: $('#printIncludeToc'),
+    printDarkMode: $('#printDarkMode'),
   };
 
   // ---------- Init ----------
@@ -72,11 +85,27 @@
         });
       }
 
-      // Listen for install prompt
+      // Listen for install prompt — Chrome fires this once per page load
+      // when the PWA meets installability criteria. We DO call
+      // preventDefault() so the browser doesn't show its own banner
+      // (which can be jarring), and instead we show our own install
+      // button in the topbar. Clicking the button calls .prompt() to
+      // trigger the install flow.
+      //
+      // The console warning "beforeinstallpromptevent.preventDefault()
+      // called" is expected and harmless — it's just Chrome reminding
+      // us that we now control when to show the prompt.
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredInstallPrompt = e;
         dom.installBtn.style.display = 'inline-flex';
+      });
+
+      // Also handle the case where the app is already installed — hide
+      // the install button entirely.
+      window.addEventListener('appinstalled', () => {
+        dom.installBtn.style.display = 'none';
+        deferredInstallPrompt = null;
       });
 
       // Load book data
@@ -94,8 +123,8 @@
       const m = book.metadata;
       dom.metaChapters.textContent = m.numberedChapters;
       dom.metaAppendices.textContent = m.appendices;
-      // Diagrams = flow diagrams + UI mockups (combined "visuals" count)
-      dom.metaDiagrams.textContent = `${m.diagrams + m.mockups}`;
+      // Diagrams = flow diagrams + UI mockups + comic panels (combined "visuals" count)
+      dom.metaDiagrams.textContent = `${m.diagrams + m.mockups + (m.comicPanels || 0)}`;
       dom.metaReadingTime.textContent = m.readingTime;
       dom.metaEdition.textContent = m.edition.replace('Windows Edition ', '');
 
@@ -181,15 +210,126 @@
     }
   }
 
+  // ---------- Force-reload cover (bypass service worker cache) ----------
+  // Triggered when user clicks "Cover & Welcome" button in sidebar.
+  // This solves the "stuck on old cached version" problem by:
+  //   1. Telling the service worker to skip waiting (activate new SW immediately)
+  //   2. Clearing all caches
+  //   3. Unregistering the service worker
+  //   4. Forcing a hard reload that bypasses cache
+  async function forceReloadCover() {
+    setCoverButtonReloading(true);
+
+    try {
+      // 1. Tell all service workers to skip waiting
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const reg of regs) {
+          // Send skipWaiting message
+          if (reg.waiting) {
+            reg.waiting.postMessage('SKIP_WAITING');
+          }
+          // Then unregister
+          await reg.unregister();
+        }
+      }
+
+      // 2. Clear ALL caches (this includes book.json, images, everything)
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+
+      // 3. Force reload to cover, bypassing cache
+      // The location.reload(true) is deprecated; modern way is to use
+      // location.replace with a cache-busting query param.
+      const url = new URL(location.href);
+      url.hash = ''; // go to cover
+      url.searchParams.set('_cb', Date.now().toString()); // cache-busting param
+      location.replace(url.toString());
+
+      // After reload, remove the cache-busting param so URL stays clean
+      // (history.replaceState runs after the new page loads)
+      setTimeout(() => {
+        const clean = new URL(location.href);
+        clean.searchParams.delete('_cb');
+        history.replaceState(null, '', clean.toString());
+      }, 1500);
+    } catch (err) {
+      console.error('Force reload failed:', err);
+      // Fallback: just navigate to cover
+      location.hash = '';
+      setTimeout(scrollToTop, 100);
+      setCoverButtonReloading(false);
+    }
+  }
+
+  function setCoverButtonReloading(loading) {
+    const btn = document.querySelector('.toc-link-cover');
+    if (!btn) return;
+    if (loading) {
+      btn.classList.add('reloading');
+      btn.disabled = true;
+    } else {
+      btn.classList.remove('reloading');
+      btn.disabled = false;
+    }
+  }
+
   function showCover() {
     currentChapterId = 'cover';
     dom.breadcrumb.innerHTML = `<a href="#/cover">Home</a>`;
-    dom.title.textContent = book.metadata.title;
-    dom.content.innerHTML = book.cover_html + '<h2>Table of Contents</h2>' + book.toc_html;
+    dom.title.textContent = '';
+
+    // Build a proper book cover hero, then the existing cover content,
+    // then the TOC. The hero mimics the PDF cover page (navy gradient with
+    // amber accents, big title, subtitle, edition badge).
+    const m = book.metadata;
+    const heroHtml = `
+      <div class="book-cover-hero">
+        <div class="book-cover-spine"></div>
+        <div class="book-cover-content">
+          <div class="book-cover-edition">${escapeHtml(m.edition)}</div>
+          <h1 class="book-cover-title">${escapeHtml(m.title)}</h1>
+          <div class="book-cover-subtitle">${escapeHtml(m.subtitle)}</div>
+          <div class="book-cover-tagline">Zero-Mac Hybrid Architecture</div>
+          <div class="book-cover-tagline-sub">No Mac Required · No Prior Experience Assumed</div>
+          <div class="book-cover-divider"></div>
+          <div class="book-cover-stats">
+            <div class="book-cover-stat">
+              <div class="book-cover-stat-num">${m.numberedChapters}</div>
+              <div class="book-cover-stat-label">Chapters</div>
+            </div>
+            <div class="book-cover-stat">
+              <div class="book-cover-stat-num">${m.appendices}</div>
+              <div class="book-cover-stat-label">Appendices</div>
+            </div>
+            <div class="book-cover-stat">
+              <div class="book-cover-stat-num">${m.diagrams + m.mockups + (m.comicPanels || 0)}</div>
+              <div class="book-cover-stat-label">Visuals</div>
+            </div>
+            <div class="book-cover-stat">
+              <div class="book-cover-stat-num">${m.readingTime}</div>
+              <div class="book-cover-stat-label">Reading Time</div>
+            </div>
+          </div>
+          <div class="book-cover-divider"></div>
+          <div class="book-cover-author">By ${escapeHtml(m.author)}</div>
+          <div class="book-cover-updated">Last updated: ${escapeHtml(m.lastUpdated)}</div>
+        </div>
+      </div>
+      <div class="book-cover-intro">
+        <p>This book takes a complete beginner — someone who has never used a command line, never compiled an app, never opened a Git repository — and walks them keystroke-by-keystroke from a folder of PWA web files (index.html, CSS, JavaScript) all the way to published, signed, store-approved apps on both the Apple App Store and Google Play.</p>
+        <p>You will use only a standard Windows 10 or Windows 11 PC. <strong>No Mac. No Xcode. No paid Apple Developer hardware.</strong> The cloud Mac is rented for free by GitHub, the cryptographic signing keys are forged with the OpenSSL library that ships inside Git for Windows, and every screen you need to click is described in the same detail a cooking recipe describes how to crack an egg.</p>
+        <p style="font-style:italic; text-align:center; font-size:1.1em; margin-top:1.5em;"><strong>If you can follow a recipe, you can ship an app.</strong></p>
+      </div>
+    `;
+
+    dom.content.innerHTML = heroHtml + '<h2>Table of Contents</h2>' + book.toc_html;
     dom.nav.innerHTML = buildChapterNav(null, chapterOrder[0]);
     updateActiveToc('cover');
     scrollToTop();
-    document.title = `${book.metadata.title} — ${book.metadata.edition}`;
+    document.title = `${m.title} — ${m.edition}`;
   }
 
   function showChapter(id) {
@@ -536,6 +676,208 @@
     }
   }
 
+  // ---------- Print dialog ----------
+  function openPrintDialog() {
+    // Populate the current chapter title
+    if (currentChapterId === 'cover') {
+      dom.printCurrentTitle.textContent = 'Cover & Welcome page';
+    } else if (chapterIndex[currentChapterId]) {
+      dom.printCurrentTitle.textContent = chapterIndex[currentChapterId].title;
+    } else {
+      dom.printCurrentTitle.textContent = '— unknown —';
+    }
+    dom.printTotalChapters.textContent = book.metadata.numberedChapters + book.metadata.appendices;
+
+    // Populate the chapter range dropdowns (all non-divider chapters + appendices)
+    const options = [];
+    options.push('<option value="cover">Cover & Welcome</option>');
+    for (const ch of book.chapters) {
+      if (ch.is_divider) continue;
+      options.push(`<option value="${ch.id}">${escapeHtml(ch.title)}</option>`);
+    }
+    dom.printFrom.innerHTML = options.join('');
+    dom.printTo.innerHTML = options.join('');
+    // Default: first chapter to last
+    const nonDividers = book.chapters.filter(c => !c.is_divider);
+    if (nonDividers.length > 0) {
+      dom.printFrom.value = nonDividers[0].id;
+      dom.printTo.value = nonDividers[nonDividers.length - 1].id;
+    }
+
+    dom.printOverlay.style.display = 'flex';
+  }
+
+  function wirePrintDialog() {
+    dom.printClose.addEventListener('click', closePrintDialog);
+    dom.printCancel.addEventListener('click', closePrintDialog);
+    dom.printOverlay.addEventListener('click', (e) => {
+      if (e.target === dom.printOverlay) closePrintDialog();
+    });
+
+    // Show/hide the range row when "range" radio is selected
+    document.querySelectorAll('input[name="printScope"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const isRange = document.querySelector('input[name="printScope"][value="range"]').checked;
+        dom.printRangeRow.style.display = isRange ? 'flex' : 'none';
+      });
+    });
+
+    dom.printConfirm.addEventListener('click', performPrint);
+  }
+
+  function closePrintDialog() {
+    dom.printOverlay.style.display = 'none';
+  }
+
+  function performPrint() {
+    const scope = document.querySelector('input[name="printScope"]:checked').value;
+    const includeCover = dom.printIncludeCover.checked;
+    const includeToc = dom.printIncludeToc.checked;
+    const useDarkMode = dom.printDarkMode.checked;
+
+    // Build the list of chapters to print
+    let chaptersToPrint = [];
+    if (scope === 'current') {
+      if (currentChapterId === 'cover') {
+        // Print just the cover
+        chaptersToPrint = [];
+      } else if (chapterIndex[currentChapterId]) {
+        chaptersToPrint = [chapterIndex[currentChapterId]];
+      }
+    } else if (scope === 'all') {
+      chaptersToPrint = book.chapters.filter(c => !c.is_divider);
+    } else if (scope === 'range') {
+      const fromId = dom.printFrom.value;
+      const toId = dom.printTo.value;
+      const nonDividers = book.chapters.filter(c => !c.is_divider);
+      const fromIdx = nonDividers.findIndex(c => c.id === fromId);
+      const toIdx = nonDividers.findIndex(c => c.id === toId);
+      if (fromIdx === -1 || toIdx === -1) {
+        alert('Please select valid From and To chapters.');
+        return;
+      }
+      const start = Math.min(fromIdx, toIdx);
+      const end = Math.max(fromIdx, toIdx);
+      chaptersToPrint = nonDividers.slice(start, end + 1);
+    }
+
+    // Build the print HTML
+    let printHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8">';
+    printHtml += '<title>PWA Release for Dummies — Print</title>';
+    printHtml += '<style>';
+    // Inline the CSS (simplified print styles)
+    printHtml += `
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Noto Serif', Georgia, serif;
+        font-size: 11pt;
+        line-height: 1.55;
+        color: #1A1A1A;
+        background: #FFFFFF;
+        ${useDarkMode ? 'background: #1A1A1A; color: #E5E7EB;' : ''}
+      }
+      h1 {
+        font-family: 'Noto Serif', Georgia, serif;
+        font-size: 22pt;
+        font-weight: 900;
+        color: ${useDarkMode ? '#FFD580' : '#1B3A5C'};
+        border-bottom: 3px solid #D97706;
+        padding-bottom: 6pt;
+        margin: 24pt 0 12pt;
+        page-break-before: always;
+      }
+      h1:first-of-type { page-break-before: avoid; }
+      h2 { font-size: 16pt; color: ${useDarkMode ? '#FFD580' : '#1B3A5C'}; margin: 18pt 0 8pt; }
+      h3 { font-size: 13pt; color: ${useDarkMode ? '#FFD580' : '#1B3A5C'}; margin: 14pt 0 6pt; }
+      p { margin: 0 0 8pt; }
+      ul, ol { margin: 0 0 8pt; padding-left: 22pt; }
+      li { margin-bottom: 3pt; }
+      pre {
+        background: ${useDarkMode ? '#1E293B' : '#F5F5F0'};
+        border: 1px solid #DDD;
+        border-left: 4px solid #1B3A5C;
+        padding: 8pt 10pt;
+        font-family: 'Consolas', monospace;
+        font-size: 9pt;
+        white-space: pre-wrap;
+        margin: 8pt 0;
+      }
+      code {
+        font-family: 'Consolas', monospace;
+        font-size: 9pt;
+        background: ${useDarkMode ? '#1E293B' : '#F5F5F0'};
+        padding: 1pt 3pt;
+      }
+      pre code { background: transparent; padding: 0; }
+      table { width: 100%; border-collapse: collapse; margin: 10pt 0; font-size: 9.5pt; }
+      th { background: #1B3A5C; color: #FFF; padding: 6pt 8pt; text-align: left; }
+      td { padding: 5pt 8pt; border: 1px solid #DDD; vertical-align: top; }
+      tr:nth-child(even) td { background: ${useDarkMode ? '#1E293B' : '#FAF7F0'}; }
+      .why-box, .howto-box, .error-box, .novice-note {
+        border-radius: 6pt; padding: 10pt 14pt; margin: 10pt 0;
+        border-width: 1pt 1pt 1pt 4pt; border-style: solid;
+        page-break-inside: avoid;
+      }
+      .why-box { background: #FFF8E1; border-color: #D97706; }
+      .howto-box { background: #EFF6FF; border-color: #1B3A5C; }
+      .error-box { background: #FEF2F2; border-color: #B91C1C; }
+      .novice-note { background: #F0FDF4; border-color: #047857; }
+      .figure-container { text-align: center; margin: 14pt 0; page-break-inside: avoid; }
+      .figure-container img { max-width: 100%; height: auto; border: 1px solid #DDD; }
+      .figure-caption { font-size: 9pt; color: #6B7280; font-style: italic; margin-top: 6pt; }
+      .cover {
+        background: linear-gradient(135deg, #1B3A5C 0%, #102538 100%);
+        color: #FFFFFF; padding: 80pt 40pt; text-align: center;
+        border-radius: 12pt; margin-bottom: 30pt; page-break-after: always;
+      }
+      .cover h1 { color: #FFFFFF; border: none; font-size: 32pt; page-break-before: avoid; }
+      .cover h3 { color: #FFD580; font-style: italic; }
+      .cover p { color: rgba(255,255,255,0.9); font-size: 11pt; }
+      blockquote {
+        background: #FFF8E1; border-left: 4pt solid #D97706;
+        padding: 8pt 14pt; margin: 10pt 0; font-style: italic;
+      }
+      @page { margin: 18mm 16mm; }
+    `;
+    printHtml += '</style></head><body>';
+
+    // Add cover page
+    if (includeCover) {
+      printHtml += `<div class="cover">${book.cover_html}</div>`;
+    }
+
+    // Add TOC
+    if (includeToc) {
+      printHtml += `<h1>Table of Contents</h1>${book.toc_html}`;
+    }
+
+    // Add each chapter
+    for (const ch of chaptersToPrint) {
+      printHtml += `<h1>${escapeHtml(ch.title)}</h1>`;
+      printHtml += ch.html;
+    }
+
+    printHtml += '</body></html>';
+
+    // Open in a new window and trigger print
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      alert('Please allow pop-ups to use the print feature.');
+      return;
+    }
+    printWindow.document.write(printHtml);
+    printWindow.document.close();
+    // Wait for images to load before printing
+    printWindow.onload = () => {
+      setTimeout(() => {
+        printWindow.print();
+        // Don't auto-close — user may want to save as PDF first
+      }, 500);
+    };
+
+    closePrintDialog();
+  }
+
   // ---------- Wire events ----------
   function wireEvents() {
     // Routing
@@ -551,8 +893,22 @@
     dom.menuToggle.addEventListener('click', toggleSidebar);
     dom.sidebarBackdrop.addEventListener('click', closeSidebar);
 
+    // Cover & Welcome button — force-reload and clear cache so user always
+    // sees the latest version. This solves "I'm stuck on old content" issues
+    // without the user needing to know how to clear their browser cache.
+    const coverBtn = document.querySelector('.toc-link-cover');
+    if (coverBtn) {
+      coverBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        forceReloadCover();
+      });
+    }
+
     // Print
-    dom.printBtn.addEventListener('click', () => window.print());
+    dom.printBtn.addEventListener('click', openPrintDialog);
+
+    // Print dialog events
+    wirePrintDialog();
 
     // Install
     dom.installBtn.addEventListener('click', async () => {
