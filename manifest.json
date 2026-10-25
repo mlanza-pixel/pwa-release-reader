@@ -1,0 +1,54 @@
+{
+  "name": "PWA Release for Dummies — Windows Edition v2.0",
+  "short_name": "PWA Release",
+  "description": "A Novice Cook's Guide from Raw Web Files to Apple & Google App Stores. Zero-Mac Hybrid Architecture. 271 pages, 25 diagrams, 45-question FAQ.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1B3A5C",
+  "theme_color": "#1B3A5C",
+  "categories": ["books", "education", "productivity", "developer"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cover & Welcome",
+      "short_name": "Home",
+      "url": "./#/cover",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Search the book",
+      "short_name": "Search",
+      "url": "./#/cover",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

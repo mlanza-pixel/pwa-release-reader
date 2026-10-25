@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1B3A5C">
+  <meta name="description" content="PWA Release for Dummies — A Novice Cook's Guide from Raw Web Files to Apple & Google App Stores. Windows Edition v2.0.">
+
+  <title>PWA Release for Dummies — Windows Edition v2.0</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PWA Release for Dummies — Windows Edition v2.0">
+  <meta property="og:description" content="A Novice Cook's Guide from Raw Web Files to Apple & Google App Stores. Zero-Mac Hybrid Architecture.">
+  <meta property="og:type" content="book">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Reading progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- App shell -->
+  <div class="app-shell">
+
+    <!-- Top navigation bar -->
+    <header class="topbar">
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle sidebar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="topbar-brand">
+        <div class="brand-mark">PWA</div>
+        <div class="brand-text">
+          <div class="brand-title">PWA Release for Dummies</div>
+          <div class="brand-sub">Windows Edition v2.0</div>
+        </div>
+      </div>
+
+      <!-- Search box -->
+      <div class="search-wrap" id="searchWrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search the entire book…  (press /)"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="search-clear" id="searchClear" aria-label="Clear search" style="display:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="6" y1="18" x2="18" y2="6"/>
+          </svg>
+        </button>
+
+        <!-- Search results dropdown -->
+        <div class="search-results" id="searchResults" style="display:none;">
+          <div class="search-results-header">
+            <span id="searchResultsCount">0 results</span>
+            <span class="search-results-hint">Press ESC to close</span>
+          </div>
+          <div class="search-results-list" id="searchResultsList"></div>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="icon-btn install-btn" id="installBtn" aria-label="Install app" title="Install as app" style="display:none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </button>
+        <button class="icon-btn print-btn" id="printBtn" aria-label="Print" title="Print / Save as PDF">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <rect x="6" y="14" width="12" height="8"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar (TOC) -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-section">
+          <button class="toc-link toc-link-cover" data-target="cover">
+            <span class="toc-icon">📖</span>
+            <span>Cover & Welcome</span>
+          </button>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-label">Contents</div>
+          <nav class="toc" id="tocNav">
+            <!-- TOC populated by JS -->
+          </nav>
+        </div>
+        <div class="sidebar-footer">
+          <div class="sidebar-meta">
+            <div class="sidebar-meta-row"><span>Chapters</span><strong id="metaChapters">—</strong></div>
+            <div class="sidebar-meta-row"><span>Pages</span><strong id="metaPages">~271</strong></div>
+            <div class="sidebar-meta-row"><span>Diagrams</span><strong>25</strong></div>
+            <div class="sidebar-meta-row"><span>Updated</span><strong>Oct 2025</strong></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar backdrop (mobile) -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- Main content area -->
+    <main class="content" id="content">
+
+      <!-- Loading state -->
+      <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading book…</div>
+      </div>
+
+      <!-- Actual chapter content (populated by JS) -->
+      <article class="reader" id="reader" style="display:none;">
+        <!-- Chapter header -->
+        <div class="chapter-breadcrumb" id="chapterBreadcrumb"></div>
+        <h1 class="chapter-title" id="chapterTitle"></h1>
+        <div class="chapter-content" id="chapterContent"></div>
+
+        <!-- Chapter navigation -->
+        <div class="chapter-nav" id="chapterNav"></div>
+      </article>
+
+    </main>
+
+  </div>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"/>
+      <polyline points="5 12 12 5 19 12"/>
+    </svg>
+  </button>
+
+  <!-- Keyboard shortcuts overlay -->
+  <div class="shortcuts-overlay" id="shortcutsOverlay" style="display:none;">
+    <div class="shortcuts-modal" onclick="event.stopPropagation()">
+      <div class="shortcuts-header">
+        <h2>Keyboard Shortcuts</h2>
+        <button class="icon-btn" id="shortcutsClose" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="6" y1="18" x2="18" y2="6"/>
+          </svg>
+        </button>
+      </div>
+      <div class="shortcuts-list">
+        <div class="shortcut-row"><kbd>/</kbd><span>Focus search</span></div>
+        <div class="shortcut-row"><kbd>Esc</kbd><span>Close search / overlay</span></div>
+        <div class="shortcut-row"><kbd>←</kbd><span>Previous chapter</span></div>
+        <div class="shortcut-row"><kbd>→</kbd><span>Next chapter</span></div>
+        <div class="shortcut-row"><kbd>t</kbd><span>Toggle theme (light/dark)</span></div>
+        <div class="shortcut-row"><kbd>m</kbd><span>Toggle sidebar (mobile)</span></div>
+        <div class="shortcut-row"><kbd>?</kbd><span>Show this help</span></div>
+        <div class="shortcut-row"><kbd>g</kbd> <kbd>h</kbd><span>Go to cover / home</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/search.js" defer></script>
+  <script src="js/app.js" defer></script>
+
+</body>
+</html>
