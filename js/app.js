@@ -50,11 +50,6 @@
     printBtn: $('#printBtn'),
     progressBar: $('#progressBar'),
     backToTop: $('#backToTop'),
-    metaChapters: $('#metaChapters'),
-    metaAppendices: $('#metaAppendices'),
-    metaDiagrams: $('#metaDiagrams'),
-    metaReadingTime: $('#metaReadingTime'),
-    metaEdition: $('#metaEdition'),
     shortcutsOverlay: $('#shortcutsOverlay'),
     shortcutsClose: $('#shortcutsClose'),
     // Print dialog
@@ -119,18 +114,10 @@
         if (!ch.is_divider) chapterOrder.push(ch.id);
       });
 
-      // Update meta — pull accurate values from book.metadata
-      const m = book.metadata;
-      // Version is the most important field — shown in sidebar + topbar
-      const metaVersion = document.getElementById('metaVersion');
-      if (metaVersion) metaVersion.textContent = m.version || 'v?';
-      dom.metaChapters.textContent = m.numberedChapters;
-      dom.metaAppendices.textContent = m.appendices;
-      dom.metaReadingTime.textContent = m.readingTime;
-
       // Update the version badge in the topbar (upper-left banner) so the
       // user can always see which version they're running. This solves the
       // "am I looking at the latest version?" problem.
+      const m = book.metadata;
       const versionBadge = document.getElementById('brandVersion');
       if (versionBadge && m.version) {
         versionBadge.textContent = m.version;
