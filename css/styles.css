@@ -984,3 +984,79 @@ input { font-family: inherit; }
   .chapter-content h1, .chapter-content h2, .chapter-content h3 { page-break-after: avoid; }
   body { background: #FFFFFF; color: #000000; }
 }
+
+/* ---------- TOC on cover page (clickable chapter links) ---------- */
+/* Target only the .cover-toc container so we don't affect list styles
+   inside regular chapter content (steps, bullet points, etc.) */
+
+.cover-toc > p > strong:only-child {
+  display: inline-block;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  background: var(--navy);
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+[data-theme="dark"] .cover-toc > p > strong:only-child {
+  background: var(--amber);
+  color: var(--navy-dark);
+}
+
+.cover-toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 16px;
+}
+.cover-toc ul li {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 6px;
+}
+.cover-toc ul li a {
+  display: block;
+  padding: 10px 14px 10px 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--amber);
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  transition: background 0.15s, border-color 0.15s, transform 0.10s, color 0.15s, padding-left 0.10s;
+}
+.cover-toc ul li a:hover {
+  background: var(--bg-hover);
+  border-left-color: var(--navy);
+  border-left-width: 6px;
+  padding-left: 14px;
+  color: var(--navy);
+  transform: translateX(2px);
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .cover-toc ul li a:hover {
+  color: var(--amber-light);
+  border-left-color: var(--amber);
+}
+.cover-toc ul li a:active {
+  transform: translateX(0);
+}
+
+/* Print styles for TOC */
+@media print {
+  .cover-toc ul li a {
+    color: #000000;
+    text-decoration: underline;
+    border: none;
+    padding: 4px 0;
+    background: transparent;
+  }
+}
