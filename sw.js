@@ -7,7 +7,7 @@
    - On activate: clean up old caches
    ============================================================ */
 
-const VERSION = 'v2.2.0';
+const VERSION = 'v2.3.0';
 const CACHE_SHELL = `pwa-reader-shell-${VERSION}`;
 const CACHE_CONTENT = `pwa-reader-content-${VERSION}`;
 

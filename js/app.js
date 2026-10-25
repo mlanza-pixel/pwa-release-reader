@@ -364,6 +364,11 @@
     if (!ch) return;
     currentChapterId = id;
 
+    // Reset auto-advance for the new chapter
+    autoAdvanceTriggered = false;
+    if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+    hideAutoAdvanceIndicator();
+
     dom.breadcrumb.innerHTML = `
       <a href="#/cover">Home</a> &nbsp;›&nbsp;
       <span>${escapeHtml(ch.part)}</span>
@@ -621,7 +626,14 @@
     dom.sidebarBackdrop.classList.remove('show');
   }
 
-  // ---------- Progress + Back-to-top ----------
+  // ---------- Scroll state (progress bar + back-to-top + auto-advance) ----------
+  // Auto-advance: when the user scrolls to the very bottom of a chapter,
+  // automatically load the next chapter after a brief delay. This way users
+  // can read the entire book by just scrolling, without needing to click
+  // "Next Chapter" buttons.
+  let autoAdvanceTimer = null;
+  let autoAdvanceTriggered = false;
+
   function updateScrollState() {
     // Progress bar
     const scrollTop = window.scrollY;
@@ -635,6 +647,59 @@
     } else {
       dom.backToTop.classList.remove('show');
     }
+
+    // Auto-advance: check if user has scrolled to the bottom
+    const scrollBottom = scrollTop + window.innerHeight;
+    const totalHeight = document.documentElement.scrollHeight;
+
+    // If user is within 50px of the bottom AND we haven't already triggered
+    if (scrollBottom >= totalHeight - 50 && !autoAdvanceTriggered && currentChapterId !== 'cover') {
+      const nextId = getNextChapter(currentChapterId);
+      if (nextId) {
+        autoAdvanceTriggered = true;
+        // Show a "Loading next chapter..." indicator
+        showAutoAdvanceIndicator(nextId);
+        // Wait 1.5 seconds before advancing (gives user time to scroll back up
+        // if they were just checking the end of the chapter)
+        autoAdvanceTimer = setTimeout(() => {
+          location.hash = `/${nextId}`;
+          hideAutoAdvanceIndicator();
+        }, 1500);
+      }
+    } else if (scrollBottom < totalHeight - 100 && autoAdvanceTriggered) {
+      // User scrolled back up — cancel the auto-advance
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTriggered = false;
+      hideAutoAdvanceIndicator();
+    }
+  }
+
+  function showAutoAdvanceIndicator(nextId) {
+    let indicator = document.getElementById('autoAdvanceIndicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'autoAdvanceIndicator';
+      indicator.style.cssText = `
+        position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+        background: var(--navy); color: #FFFFFF; padding: 12px 24px;
+        border-radius: 24px; font-size: 13px; font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.20); z-index: 50;
+        display: flex; align-items: center; gap: 10px;
+      `;
+      document.body.appendChild(indicator);
+    }
+    const nextTitle = chapterIndex[nextId] ? chapterIndex[nextId].title : 'next chapter';
+    indicator.innerHTML = `
+      <span style="display:inline-block;width:16px;height:16px;border:2px solid #FFD580;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span>
+      Loading next: ${escapeHtml(nextTitle.substring(0, 50))}...
+      <span style="font-size:11px;color:#C7D2FE;margin-left:8px;">(scroll up to cancel)</span>
+    `;
+    indicator.style.display = 'flex';
+  }
+
+  function hideAutoAdvanceIndicator() {
+    const indicator = document.getElementById('autoAdvanceIndicator');
+    if (indicator) indicator.style.display = 'none';
   }
 
   function scrollToTop() {

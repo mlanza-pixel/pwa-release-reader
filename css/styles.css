@@ -1491,3 +1491,31 @@ a.toc-part-header.active .toc-part-tag {
     padding: 2px 6px;
   }
 }
+
+/* ---------- Task list checkboxes (from - [ ] markdown) ---------- */
+.chapter-content li.task-list-item {
+  list-style: none;
+  padding-left: 0;
+  margin-left: -20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.task-checkbox {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.task-checkbox-checked {
+  color: var(--emerald);
+}
+.task-list-item-checked {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
