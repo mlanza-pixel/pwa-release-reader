@@ -73,10 +73,34 @@
       // Load theme first (avoid flash of wrong theme)
       loadTheme();
 
-      // Register service worker
+      // Register service worker — but with a controllerchange listener
+      // that forces reload when a new SW takes over. This ensures the
+      // user always gets the latest version after we push an update.
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(err => {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+          // Listen for updates
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            if (newWorker) {
+              newWorker.addEventListener('statechange', () => {
+                // When a new SW finishes installing, tell it to skip waiting
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  newWorker.postMessage('SKIP_WAITING');
+                }
+              });
+            }
+          });
+        }).catch(err => {
           console.warn('SW registration failed:', err);
+        });
+
+        // When a new SW takes control, reload the page to get latest assets
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+          }
         });
       }
 
@@ -135,12 +159,20 @@
     } catch (err) {
       console.error('Init failed:', err);
       dom.loading.innerHTML = `
-        <div style="color:var(--red);font-weight:600;margin-bottom:8px;">Failed to load book</div>
-        <div style="font-size:13px;color:var(--text-muted);">${err.message}</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:16px;">
-          Make sure you are running this from a web server (e.g., <code>python3 -m http.server</code>),
-          not opening the file directly.
+        <div style="color:var(--red);font-weight:700;margin-bottom:8px;font-size:16px;">⚠ Failed to load book</div>
+        <div style="font-size:13px;color:var(--text);margin-bottom:12px;"><strong>Error:</strong> ${err.message}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">
+          This is usually caused by a stale cached version. Try these fixes (in order):
         </div>
+        <div style="font-size:12px;color:var(--text);text-align:left;max-width:400px;margin:0 auto 16px;line-height:1.8;">
+          <strong>1.</strong> Press <kbd>Ctrl+Shift+R</kbd> (hard refresh — bypasses cache)<br>
+          <strong>2.</strong> Press <kbd>F12</kbd> → Application → Storage → "Clear site data"<br>
+          <strong>3.</strong> Close ALL browser tabs, reopen, try again<br>
+          <strong>4.</strong> Make sure you're running <code>python3 -m http.server</code> (not opening the file directly)
+        </div>
+        <button onclick="location.reload(true)" style="padding:8px 20px;background:var(--navy);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">
+          🔄 Reload Page
+        </button>
       `;
     }
   }
