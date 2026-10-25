@@ -51,6 +51,10 @@
     progressBar: $('#progressBar'),
     backToTop: $('#backToTop'),
     metaChapters: $('#metaChapters'),
+    metaAppendices: $('#metaAppendices'),
+    metaDiagrams: $('#metaDiagrams'),
+    metaReadingTime: $('#metaReadingTime'),
+    metaEdition: $('#metaEdition'),
     shortcutsOverlay: $('#shortcutsOverlay'),
     shortcutsClose: $('#shortcutsClose'),
   };
@@ -86,8 +90,14 @@
         if (!ch.is_divider) chapterOrder.push(ch.id);
       });
 
-      // Update meta
-      dom.metaChapters.textContent = book.metadata.totalChapters;
+      // Update meta — pull accurate values from book.metadata
+      const m = book.metadata;
+      dom.metaChapters.textContent = m.numberedChapters;
+      dom.metaAppendices.textContent = m.appendices;
+      // Diagrams = flow diagrams + UI mockups (combined "visuals" count)
+      dom.metaDiagrams.textContent = `${m.diagrams + m.mockups}`;
+      dom.metaReadingTime.textContent = m.readingTime;
+      dom.metaEdition.textContent = m.edition.replace('Windows Edition ', '');
 
       // Build sidebar TOC
       buildSidebar();
@@ -118,15 +128,18 @@
 
     for (const ch of book.chapters) {
       if (ch.is_divider) {
-        // Start a new part group
+        // Close previous part group if open
         if (currentPart !== null) html.push('</div>');
         currentPart = ch.id;
         html.push(`<div class="toc-part" data-part="${ch.id}">`);
+        // Make the part header clickable too — its content (which may
+        // include embedded diagrams like the 5-Tier Testing Ladder) is
+        // now accessible via the showChapter() function.
         html.push(`
-          <div class="toc-part-header">
+          <a href="#/${ch.id}" class="toc-part-header" title="${escapeHtml(ch.title)}">
             <span class="toc-part-tag">${getPartTag(ch.title)}</span>
             <span>${getPartName(ch.title)}</span>
-          </div>
+          </a>
         `);
       } else {
         html.push(`
@@ -240,12 +253,12 @@
   }
 
   function updateActiveToc(id) {
-    $$('.toc-chapter, .toc-link-cover').forEach(el => el.classList.remove('active'));
+    $$('.toc-chapter, .toc-link-cover, .toc-part-header').forEach(el => el.classList.remove('active'));
     if (id === 'cover') {
       const coverLink = document.querySelector('.toc-link-cover');
       if (coverLink) coverLink.classList.add('active');
     } else {
-      const link = document.querySelector(`.toc-chapter[data-chapter="${id}"]`);
+      const link = document.querySelector(`.toc-chapter[data-chapter="${id}"], a.toc-part-header[href="#/${id}"]`);
       if (link) link.classList.add('active');
     }
   }

@@ -383,6 +383,9 @@ input { font-family: inherit; }
   margin-bottom: 4px;
 }
 .toc-part-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 12px;
   font-size: 11px;
   font-weight: 700;
@@ -392,11 +395,36 @@ input { font-family: inherit; }
   background: var(--bg-muted);
   border-radius: 6px;
   margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+a.toc-part-header:hover {
+  background: var(--navy);
+  color: #FFFFFF;
+}
+a.toc-part-header:hover .toc-part-tag {
+  background: var(--amber);
+  color: #FFFFFF;
+}
+a.toc-part-header.active {
+  background: var(--navy);
+  color: #FFFFFF;
+}
+a.toc-part-header.active .toc-part-tag {
+  background: var(--amber);
+  color: #FFFFFF;
 }
 [data-theme="dark"] .toc-part-header { color: var(--amber-light); }
+[data-theme="dark"] a.toc-part-header:hover,
+[data-theme="dark"] a.toc-part-header.active {
+  background: var(--amber);
+  color: var(--navy-dark);
+}
+[data-theme="dark"] a.toc-part-header:hover .toc-part-tag,
+[data-theme="dark"] a.toc-part-header.active .toc-part-tag {
+  background: var(--navy-dark);
+  color: #FFFFFF;
+}
 .toc-part-header .toc-part-tag {
   background: var(--navy);
   color: #FFFFFF;

@@ -5,8 +5,13 @@
     "edition": "Windows Edition v2.0",
     "author": "Z.ai",
     "lastUpdated": "October 2025",
-    "totalChapters": 48,
-    "totalParts": 7
+    "numberedChapters": 37,
+    "appendices": 8,
+    "parts": 7,
+    "diagrams": 10,
+    "mockups": 15,
+    "faqQuestions": 45,
+    "readingTime": "4 hrs"
   },
   "cover_html": "<h1 id=\"pwa-release-for-dummies\">PWA RELEASE FOR DUMMIES</h1>\n<h3 id=\"a-novice-cooks-guide-from-raw-web-files-to-apple-google-app-stores\">A Novice Cook's Guide from Raw Web Files to Apple &amp; Google App Stores</h3>\n<p><strong>Windows Edition · Version 2.0</strong></p>\n<p><em>Zero-Mac Hybrid Architecture</em>\n<em>No Mac Required · No Prior Experience Assumed</em></p>\n<hr />\n<p>This book takes a complete beginner — someone who has never used a command line, never compiled an app, never opened a Git repository — and walks them keystroke-by-keystroke from a folder of PWA web files (index.html, CSS, JavaScript) all the way to published, signed, store-approved apps on both the Apple App Store and Google Play.</p>\n<p>You will use only a standard Windows 10 or Windows 11 PC. No Mac. No Xcode. No paid Apple Developer hardware. The cloud Mac is rented for free by GitHub, the cryptographic signing keys are forged with the OpenSSL library that ships inside Git for Windows, and every screen you need to click is described in the same detail a cooking recipe describes how to crack an egg.</p>\n<p>If you can follow a recipe, you can ship an app.</p>",
   "toc_html": "<div class=\"cover-toc\">\n<p><strong>Front Matter</strong></p>\n<ul>\n<li><a href=\"#/how-to-use-this-book\">How to Use This Book</a></li>\n<li><a href=\"#/introduction-the-zero-mac-manifesto-the-bakery-analogy\">Introduction: The Zero-Mac Manifesto &amp; The Bakery Analogy</a></li>\n</ul>\n<p><strong>PART I — Equipping the Windows Armory</strong></p>\n<ul>\n<li><a href=\"#/chapter-1-concept-primer-what-we-are-actually-building\">Chapter 1: Concept Primer — What We Are Actually Building</a></li>\n<li><a href=\"#/chapter-2-installing-node-js-lts-the-factory-engine\">Chapter 2: Installing Node.js LTS (The Factory Engine)</a></li>\n<li><a href=\"#/chapter-3-installing-git-for-windows-openssl-the-key-forger\">Chapter 3: Installing Git for Windows &amp; OpenSSL (The Key Forger)</a></li>\n<li><a href=\"#/chapter-4-installing-visual-studio-code-the-drafting-workbench\">Chapter 4: Installing Visual Studio Code (The Drafting Workbench)</a></li>\n<li><a href=\"#/chapter-5-the-verification-taste-test\">Chapter 5: The Verification Taste Test</a></li>\n</ul>\n<p><strong>PART II — Project Setup &amp; Payload Ingestion</strong></p>\n<ul>\n<li><a href=\"#/chapter-6-concept-primer-how-capacitor-wraps-a-pwa\">Chapter 6: Concept Primer — How Capacitor Wraps a PWA</a></li>\n<li><a href=\"#/chapter-7-creating-your-project-folder-installing-capacitor\">Chapter 7: Creating Your Project Folder &amp; Installing Capacitor</a></li>\n<li><a href=\"#/chapter-8-dropping-your-pwa-files-into-the-dist-folder\">Chapter 8: Dropping Your PWA Files Into the dist Folder</a></li>\n<li><a href=\"#/chapter-9-the-cors-trap-capacitor-config-json-fix\">Chapter 9: The CORS Trap &amp; capacitor.config.json Fix</a></li>\n</ul>\n<p><strong>PART III — Setting Up Developer Accounts</strong></p>\n<ul>\n<li><a href=\"#/chapter-10-creating-your-apple-developer-account-99-year\">Chapter 10: Creating Your Apple Developer Account ($99/year)</a></li>\n<li><a href=\"#/chapter-11-creating-your-google-play-developer-account-25-one-time\">Chapter 11: Creating Your Google Play Developer Account ($25 one-time)</a></li>\n</ul>\n<p><strong>PART IV — Forging Cryptographic Signing Passports</strong></p>\n<ul>\n<li><a href=\"#/chapter-12-concept-primer-why-app-signing-exists\">Chapter 12: Concept Primer — Why App Signing Exists</a></li>\n<li><a href=\"#/chapter-13-forging-your-2048-bit-rsa-private-key-csr\">Chapter 13: Forging Your 2048-bit RSA Private Key &amp; CSR</a></li>\n<li><a href=\"#/chapter-14-exchanging-your-csr-for-an-apple-distribution-certificate\">Chapter 14: Exchanging Your CSR for an Apple Distribution Certificate</a></li>\n<li><a href=\"#/chapter-15-merging-into-a-password-protected-p12-lockbox\">Chapter 15: Merging Into a Password-Protected .p12 Lockbox</a></li>\n<li><a href=\"#/chapter-16-registering-your-app-id-downloading-the-provisioning-profile\">Chapter 16: Registering Your App ID &amp; Downloading the Provisioning Profile</a></li>\n<li><a href=\"#/chapter-17-creating-the-app-store-connect-api-key-p8\">Chapter 17: Creating the App Store Connect API Key (.p8)</a></li>\n<li><a href=\"#/chapter-18-forging-your-android-keystore-jks-for-google-play\">Chapter 18: Forging Your Android Keystore (.jks) for Google Play</a></li>\n</ul>\n<p><strong>PART V — Cloud Automation Assembly Line</strong></p>\n<ul>\n<li><a href=\"#/chapter-19-creating-your-github-account-repository\">Chapter 19: Creating Your GitHub Account &amp; Repository</a></li>\n<li><a href=\"#/chapter-20-pushing-your-local-project-to-github\">Chapter 20: Pushing Your Local Project to GitHub</a></li>\n<li><a href=\"#/chapter-21-converting-binary-credentials-to-base64-text\">Chapter 21: Converting Binary Credentials to Base64 Text</a></li>\n<li><a href=\"#/chapter-22-the-deploy-bat-one-click-desktop-engine\">Chapter 22: The deploy.bat One-Click Desktop Engine</a></li>\n<li><a href=\"#/chapter-23-the-complete-ios-build-workflow-yaml\">Chapter 23: The Complete iOS Build Workflow YAML</a></li>\n<li><a href=\"#/chapter-24-the-complete-android-build-workflow-yaml\">Chapter 24: The Complete Android Build Workflow YAML</a></li>\n<li><a href=\"#/chapter-25-creating-a-google-cloud-service-account-for-play-uploads\">Chapter 25: Creating a Google Cloud Service Account for Play Uploads</a></li>\n<li><a href=\"#/chapter-26-triggering-and-watching-your-first-cloud-build\">Chapter 26: Triggering and Watching Your First Cloud Build</a></li>\n</ul>\n<p><strong>PART VI — The 5-Tier Testing &amp; Emulation Ladder</strong></p>\n<ul>\n<li><a href=\"#/chapter-27-tier-1-local-browser-emulation\">Chapter 27: Tier 1 — Local Browser Emulation</a></li>\n<li><a href=\"#/chapter-28-tier-2-capacitor-bridge-audit\">Chapter 28: Tier 2 — Capacitor Bridge Audit</a></li>\n<li><a href=\"#/chapter-29-tier-3-android-studio-emulator-on-windows\">Chapter 29: Tier 3 — Android Studio Emulator on Windows</a></li>\n<li><a href=\"#/chapter-30-tier-4-apple-testflight-on-a-real-iphone\">Chapter 30: Tier 4 — Apple TestFlight on a Real iPhone</a></li>\n<li><a href=\"#/chapter-31-tier-5-google-play-internal-testing\">Chapter 31: Tier 5 — Google Play Internal Testing</a></li>\n</ul>\n<p><strong>PART VII — Storefront Listing &amp; Launch Playbook</strong></p>\n<ul>\n<li><a href=\"#/chapter-32-capturing-app-store-screenshots-on-windows\">Chapter 32: Capturing App Store Screenshots on Windows</a></li>\n<li><a href=\"#/chapter-33-the-privacy-policy-template\">Chapter 33: The Privacy Policy Template</a></li>\n<li><a href=\"#/chapter-34-apple-app-store-connect-submission-protocol\">Chapter 34: Apple App Store Connect Submission Protocol</a></li>\n<li><a href=\"#/chapter-35-google-play-console-submission-protocol\">Chapter 35: Google Play Console Submission Protocol</a></li>\n<li><a href=\"#/chapter-36-after-approval-updates-pricing-and-maintenance\">Chapter 36: After Approval — Updates, Pricing, and Maintenance</a></li>\n<li><a href=\"#/chapter-37-the-20-tester-rule-demystified\">Chapter 37: The 20-Tester Rule Demystified</a></li>\n</ul>\n<p><strong>Appendices</strong></p>\n<ul>\n<li><a href=\"#/appendix-a-plain-english-glossary\">Appendix A: Plain-English Glossary</a></li>\n<li><a href=\"#/appendix-b-command-cheat-sheet\">Appendix B: Command Cheat-Sheet</a></li>\n<li><a href=\"#/appendix-c-store-rejection-cheat-sheet\">Appendix C: Store Rejection Cheat-Sheet</a></li>\n<li><a href=\"#/appendix-d-pre-flight-checklist\">Appendix D: Pre-Flight Checklist</a></li>\n<li><a href=\"#/appendix-e-full-troubleshooting-manual\">Appendix E: Full Troubleshooting Manual (Organized by Symptom)</a></li>\n<li><a href=\"#/appendix-f-sample-git-bash-session-transcript\">Appendix F: Sample Git Bash Session Transcript</a></li>\n<li><a href=\"#/appendix-g-screenshot-mockup-series\">Appendix G: Screenshot Mockup Series (15 annotated UI mockups)</a></li>\n<li><a href=\"#/appendix-h-frequently-asked-questions\">Appendix H: Frequently Asked Questions (45 Q&amp;As across 9 categories)</a></li>\n</ul>\n</div>",
@@ -32,8 +37,7 @@
       "title": "PART I — Equipping the Windows Armory",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART I — Equipping the Windows Armory\n\n> *\"Before you bake, you build the bakery. Four tools, installed in this exact order, take about 30 minutes. Skip none of them.\"*",
-      "html": "",
+      "html": "<h1 id=\"part-i-equipping-the-windows-armory\">PART I — Equipping the Windows Armory</h1>\n<blockquote>\n<p><em>\"Before you bake, you build the bakery. Four tools, installed in this exact order, take about 30 minutes. Skip none of them.\"</em></p>\n</blockquote>",
       "text": "PART I — Equipping the Windows Armory"
     },
     {
@@ -81,8 +85,7 @@
       "title": "PART II — Project Setup & Payload Ingestion",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART II — Project Setup & Payload Ingestion\n\n> *\"The bakery is built. Now we make the dough — wrap your PWA files inside a Capacitor native shell.\"*",
-      "html": "",
+      "html": "<h1 id=\"part-ii-project-setup-payload-ingestion\">PART II — Project Setup &amp; Payload Ingestion</h1>\n<blockquote>\n<p><em>\"The bakery is built. Now we make the dough — wrap your PWA files inside a Capacitor native shell.\"</em></p>\n</blockquote>",
       "text": "PART II — Project Setup & Payload Ingestion"
     },
     {
@@ -122,8 +125,7 @@
       "title": "PART III — Setting Up Developer Accounts",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART III — Setting Up Developer Accounts\n\n> *\"You cannot ship to a store without paying the entry fee. Apple: $99/year. Google: $25 one-time. Both require identity verification that takes 1–3 business days. Start this Part EARLY — the wait overlaps with Parts IV and V.\"*",
-      "html": "",
+      "html": "<h1 id=\"part-iii-setting-up-developer-accounts\">PART III — Setting Up Developer Accounts</h1>\n<blockquote>\n<p><em>\"You cannot ship to a store without paying the entry fee. Apple: $99/year. Google: $25 one-time. Both require identity verification that takes 1–3 business days. Start this Part EARLY — the wait overlaps with Parts IV and V.\"</em></p>\n</blockquote>",
       "text": "PART III — Setting Up Developer Accounts"
     },
     {
@@ -147,8 +149,7 @@
       "title": "PART IV — Forging Cryptographic Signing Passports",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART IV — Forging Cryptographic Signing Passports\n\n> *\"The Mac-only step, demystified. We use OpenSSL inside Git Bash to forge the same Apple RSA keys that Mac Keychain would produce, plus Java's keytool for Android. No Mac required.\"*",
-      "html": "",
+      "html": "<h1 id=\"part-iv-forging-cryptographic-signing-passports\">PART IV — Forging Cryptographic Signing Passports</h1>\n<blockquote>\n<p><em>\"The Mac-only step, demystified. We use OpenSSL inside Git Bash to forge the same Apple RSA keys that Mac Keychain would produce, plus Java's keytool for Android. No Mac required.\"</em></p>\n</blockquote>",
       "text": "PART IV — Forging Cryptographic Signing Passports"
     },
     {
@@ -212,8 +213,7 @@
       "title": "PART V — Cloud Automation Assembly Line",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART V — Cloud Automation Assembly Line\n\n> *\"The industrial oven. We create a GitHub repository, upload your signing keys as encrypted Secrets, write a one-click deploy.bat for daily use, and craft the two YAML files that tell the cloud Mac and cloud Linux exactly how to build, sign, and upload your apps.\"*",
-      "html": "",
+      "html": "<h1 id=\"part-v-cloud-automation-assembly-line\">PART V — Cloud Automation Assembly Line</h1>\n<blockquote>\n<p><em>\"The industrial oven. We create a GitHub repository, upload your signing keys as encrypted Secrets, write a one-click deploy.bat for daily use, and craft the two YAML files that tell the cloud Mac and cloud Linux exactly how to build, sign, and upload your apps.\"</em></p>\n</blockquote>",
       "text": "PART V — Cloud Automation Assembly Line"
     },
     {
@@ -285,8 +285,7 @@
       "title": "PART VI — The 5-Tier Testing & Emulation Ladder",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART VI — The 5-Tier Testing & Emulation Ladder\n\n> *\"Before submitting to stores, test your app at five progressively more realistic levels: local browser, Capacitor audit, Android emulator, TestFlight on real iPhone, and Google Play internal testing (with automated Firebase Test Lab).*\n\n\n\n<div class=\"figure-container\" markdown=\"1\">\n\n![Figure VI.1 — The 5-Tier Testing Ladder: catch bugs early, cheaply. Each tier catches problems the previous tier missed.](manuscript-images/10_testing_ladder.png)\n\n<div class=\"figure-caption\" markdown=\"1\">Figure VI.1 — The 5-Tier Testing Ladder: catch bugs early, cheaply. Each tier catches problems the previous tier missed.</div>\n\n</div>",
-      "html": "",
+      "html": "<h1 id=\"part-vi-the-5-tier-testing-emulation-ladder\">PART VI — The 5-Tier Testing &amp; Emulation Ladder</h1>\n<blockquote>\n<p><em>\"Before submitting to stores, test your app at five progressively more realistic levels: local browser, Capacitor audit, Android emulator, TestFlight on real iPhone, and Google Play internal testing (with automated Firebase Test Lab).</em></p>\n</blockquote>\n<div class=\"figure-container\">\n<p><img alt=\"Figure VI.1 — The 5-Tier Testing Ladder: catch bugs early, cheaply. Each tier catches problems the previous tier missed.\" src=\"images/10_testing_ladder.png\" /></p>\n<div class=\"figure-caption\">\n<p>Figure VI.1 — The 5-Tier Testing Ladder: catch bugs early, cheaply. Each tier catches problems the previous tier missed.</p>\n</div>\n</div>",
       "text": "PART VI — The 5-Tier Testing & Emulation Ladder"
     },
     {
@@ -334,8 +333,7 @@
       "title": "PART VII — Storefront Listing & Launch Playbook",
       "part": "Part Divider",
       "is_divider": true,
-      "markdown": "# PART VII — Storefront Listing & Launch Playbook\n\n> *\"The final mile. Capture screenshots, host a privacy policy, submit to Apple and Google, demystify the 20-tester rule, and ship.\"*",
-      "html": "",
+      "html": "<h1 id=\"part-vii-storefront-listing-launch-playbook\">PART VII — Storefront Listing &amp; Launch Playbook</h1>\n<blockquote>\n<p><em>\"The final mile. Capture screenshots, host a privacy policy, submit to Apple and Google, demystify the 20-tester rule, and ship.\"</em></p>\n</blockquote>",
       "text": "PART VII — Storefront Listing & Launch Playbook"
     },
     {
