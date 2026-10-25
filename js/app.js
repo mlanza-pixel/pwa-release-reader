@@ -121,12 +121,20 @@
 
       // Update meta — pull accurate values from book.metadata
       const m = book.metadata;
+      // Version is the most important field — shown in sidebar + topbar
+      const metaVersion = document.getElementById('metaVersion');
+      if (metaVersion) metaVersion.textContent = m.version || 'v?';
       dom.metaChapters.textContent = m.numberedChapters;
       dom.metaAppendices.textContent = m.appendices;
-      // Diagrams = flow diagrams + UI mockups + comic panels (combined "visuals" count)
-      dom.metaDiagrams.textContent = `${m.diagrams + m.mockups + (m.comicPanels || 0)}`;
       dom.metaReadingTime.textContent = m.readingTime;
-      dom.metaEdition.textContent = m.edition.replace('Windows Edition ', '');
+
+      // Update the version badge in the topbar (upper-left banner) so the
+      // user can always see which version they're running. This solves the
+      // "am I looking at the latest version?" problem.
+      const versionBadge = document.getElementById('brandVersion');
+      if (versionBadge && m.version) {
+        versionBadge.textContent = m.version;
+      }
 
       // Build sidebar TOC
       buildSidebar();
