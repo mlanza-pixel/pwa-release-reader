@@ -1,0 +1,13 @@
+# v2.5 RELEASE SAFETY - keep in project root
+*.key
+*.p12
+*.p8
+*.jks
+*.keystore
+*.mobileprovision
+*_base64.txt
+.env
+.env.*
+credentials/
+secrets/
+node_modules/
