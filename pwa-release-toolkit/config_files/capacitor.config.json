@@ -1,0 +1,14 @@
+{
+  "appId": "com.example.myapp",
+  "appName": "My PWA App",
+  "webDir": "dist",
+  "server": {
+    "iosScheme": "ionic",
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "Geolocation": {
+      "permissions": ["location"]
+    }
+  }
+}
