@@ -1,0 +1,91 @@
+# Pre-Flight Checklist (Appendix E)
+# Print this. Tick every box BEFORE clicking "Submit for Review".
+
+## Project Setup
+- [ ] capacitor.config.json has correct appId (Bundle ID) and appName
+- [ ] capacitor.config.json has server.iosScheme: "ionic" (CORS fix)
+- [ ] dist/index.html exists and is the correct entry point
+- [ ] dist/manifest.json exists with correct app name and icons
+- [ ] dist/sw.js exists and caches essential files
+- [ ] package.json has bumped version (e.g., 1.0.1 not 1.0.0)
+- [ ] ios/App/App/Info.plist has bumped CFBundleVersion
+- [ ] android/app/build.gradle has bumped versionCode and versionName
+
+## Cryptographic Credentials
+- [ ] ios_distribution.key generated (Chapter 13, p. 99)
+- [ ] distribution.cer downloaded from Apple (Chapter 14, p. 105)
+- [ ] distribution.p12 created with strong password (Chapter 15, p. 110)
+- [ ] MyPWA_AppStore.mobileprovision downloaded (Chapter 16, p. 116)
+- [ ] AuthKey_*.p8 downloaded from App Store Connect (Chapter 17, p. 123)
+- [ ] You wrote down Issuer ID and Key ID from Chapter 17, p. 123
+- [ ] my-release-key.jks generated with strong passwords (Chapter 18, p. 129)
+- [ ] You wrote down keystore password, key alias, and key password
+- [ ] service-account.json downloaded from Google Cloud (Chapter 25, p. 179)
+- [ ] All signing files backed up to a USB stick
+
+## GitHub
+- [ ] GitHub account created (Chapter 19, p. 137)
+- [ ] Private repository created
+- [ ] Local project initialized with git init and linked with git remote add origin
+- [ ] .gitignore excludes all signing files
+- [ ] Verified signing files NOT visible on GitHub.com repo page
+- [ ] All 11 GitHub Secrets set (Chapter 21, p. 151)
+- [ ] deploy.bat created and tested (Chapter 22, p. 158)
+- [ ] .github/workflows/build-ios.yml committed (Chapter 23, p. 165)
+- [ ] .github/workflows/build-android.yml committed (Chapter 24, p. 173)
+- [ ] Google Cloud project linked to Play Console (Chapter 25, p. 179)
+- [ ] Service account invited with least-privilege in Play Console
+
+## Builds
+- [ ] Latest deploy.bat push succeeded
+- [ ] GitHub Actions -> "Build iOS" shows green checkmark
+- [ ] GitHub Actions -> "Build Android" shows green checkmark
+- [ ] TestFlight shows latest build "Available for testing" (green dot)
+- [ ] Play Console -> Internal testing shows latest release "Active"
+- [ ] App installed and tested on real iPhone via TestFlight
+- [ ] App installed and tested on Android device via Internal Testing
+- [ ] Pre-launch report shows no critical crashes
+
+## App Store Connect (Apple)
+- [ ] App entry created with correct Bundle ID
+- [ ] App name is unique (you have alternative names ready)
+- [ ] Primary language set correctly
+- [ ] Privacy Policy URL set (your GitHub Pages URL)
+- [ ] Support URL set
+- [ ] Category selected (Primary and optionally Secondary)
+- [ ] Content Rights declared
+- [ ] Age Rating questionnaire completed
+- [ ] At least 3 screenshots uploaded at 1290x2796 (6.7")
+- [ ] Promotional Text written (170 chars max)
+- [ ] Description written (4000 chars max)
+- [ ] Keywords entered (100 chars max, comma-separated)
+- [ ] Copyright line set (e.g., "2025 Your Name")
+- [ ] Build selected (latest TestFlight build)
+- [ ] App Privacy declared (Location for App Functionality if applicable)
+- [ ] Agreements accepted
+
+## Google Play Console
+- [ ] App entry created with correct package name (Bundle ID)
+- [ ] Privacy Policy URL set
+- [ ] Content rating questionnaire completed
+- [ ] Target audience selected
+- [ ] Government apps question answered (typically "No")
+- [ ] App category selected
+- [ ] News app question answered (typically "No")
+- [ ] Data safety form completed
+- [ ] App access set to "Available"
+- [ ] Main store listing complete:
+  - [ ] 512x512 app icon uploaded
+  - [ ] 1024x500 feature graphic uploaded
+  - [ ] 2-8 phone screenshots uploaded
+  - [ ] Short description (80 chars max)
+  - [ ] Full description (4000 chars max)
+- [ ] 12-tester requirement completed (if applicable, Chapter 37)
+- [ ] Production release created with signed .aab
+- [ ] Release notes written
+
+## Final Sanity Check
+- [ ] Read your app description aloud - does it accurately describe the app?
+- [ ] Open your app one more time in the Android emulator - does it still work?
+- [ ] Verify all screenshots are current (not from an old version)
+- [ ] Have a friend or family member try to install and use the app
