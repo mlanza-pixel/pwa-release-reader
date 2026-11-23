@@ -1,3 +1,0 @@
-# v2.5 RC7 — GitHub First Upload
-
-Updated Chapters 20 and 21 with beginner-first GitHub creation and browser upload workflows. Existing material retained as optional technical reference. Added Python `github-check` (read-only, no push), VBA `PWA_CheckGitHubReadiness`, `PWA_OpenGitHubNew`, `PWA_OpenUploadGuide` and three corresponding macro dashboard buttons. Added the `GitHub Upload` tracking sheet and official links. `START_HERE` and launcher output remains diagnostic only. Includes new test cases. **Windows CMD / Excel VBA execution remains unverified**. No automatic GitHub push and no remote repository changed. Official GitHub browser limits: 100 files per upload and 25 MiB per file (check current docs). 
