@@ -1,0 +1,59 @@
+﻿Section,Sentence units scanned,Duplicate blocks removed,Edits made,Revised word count
+Before You Start: The Whole Story in 8 Pictures,18,0,0,363
+How to Use This Book,13,0,0,298
+Introduction: The Zero-Mac Manifesto & The Bakery Analogy,7,0,0,127
+Start Here 1 — I Already Have a Website,71,0,0,872
+Start Here 2 — Add a Manifest and Offline Helper,74,0,0,1096
+Start Here 3 — Test Your PWA and Use GitHub,82,0,0,1078
+Chapter 1 — Find Your Website and See the Plan,118,6,7,1189
+Chapter 2 — Install Node.js,115,7,8,1082
+Chapter 3 — Install Git and OpenSSL,118,7,8,1083
+Chapter 4 — Open Your Project Files,97,6,7,887
+Chapter 5 — Run Doctor for the First Time,115,6,9,1197
+Chapter 6 — How a Website Becomes an App,96,6,7,891
+Chapter 7 — Back Up and Check Your Project,99,6,7,899
+Chapter 8 — Understand the dist Folder,97,7,8,941
+Chapter 9 — Find Out Why a Page Is Blank,99,7,8,906
+Chapter 10 — Choose an iPhone Test,93,7,8,884
+Chapter 11 — Set Up Apple Developer When Needed,96,7,8,802
+Chapter 12 — Create Your Google Play Account,95,7,8,804
+Chapter 13 — Why Apps Need Signing,91,6,7,835
+Chapter 14 — Get Ready for Apple Signing Keys,94,6,7,831
+Chapter 15 — Request Your Apple Certificate,93,6,7,783
+Chapter 16 — Keep Your .p12 File Safe,93,6,7,827
+Chapter 17 — Set Your Apple App Identifier,92,7,8,754
+Chapter 18 — Understand App Store Connect API Keys,91,6,7,819
+Chapter 19 — Prepare Java and Android Signing,100,7,8,938
+Chapter 20 — Create a GitHub Repository,109,7,8,968
+Chapter 21 — Upload Your PWA to GitHub,120,7,8,1205
+Chapter 22 — Understand Base64 and Private Files,95,6,7,837
+Chapter 23 — Understand the Deploy Script,95,6,7,850
+Chapter 24 — Understand the iPhone Build Recipe,95,7,8,822
+Chapter 25 — Understand the Android Build Recipe,95,7,8,820
+Chapter 26 — Optional Google Service Accounts,93,6,7,773
+Chapter 27 — Read Your GitHub Build Progress,98,7,8,846
+Chapter 28 — Test Your Website,91,6,7,802
+Chapter 29 — Check Features That Need a Phone,91,6,7,785
+Chapter 30 — Try the Android Emulator,95,7,8,825
+Chapter 31 — Try Apple TestFlight,92,6,7,776
+Chapter 32 — Try Google Play Internal Testing,92,7,8,782
+Chapter 33 — Capture Real App Screenshots,92,6,7,800
+Chapter 34 — Write a Privacy Policy,92,7,8,842
+Chapter 35 — Prepare Your Apple Store Page,93,7,8,769
+Chapter 36 — Prepare Your Google Play Store Page,92,7,8,764
+Chapter 37 — Look After Your App,88,6,7,739
+Chapter 38 — Plan Google Closed Testing,96,7,8,847
+Chapter 39 — Use the Excel Dashboard,122,6,9,1274
+Chapter 40 — Fix Windows Tool Paths,116,6,7,1155
+Chapter 41 — Read Doctor Results and Logs,115,6,8,1211
+Chapter 42 — Prepare Your Website for Capacitor,123,7,8,1290
+APPENDICES,2,0,0,29
+Appendix A — Plain-English Glossary,184,0,0,1894
+Appendix B — Frequently Asked Questions,369,0,0,4293
+Appendix C — Command Cheat-Sheet,36,0,0,1016
+Appendix D — Store Rejection Cheat-Sheet,26,0,0,949
+Appendix E — Pre-Flight Checklist,122,0,0,971
+Appendix F — Full Troubleshooting Manual,264,0,0,1992
+Appendix G — Sample Git Bash Session Transcript,36,0,0,1761
+Appendix H — Screenshot Mockup Series (Now In-Line),40,0,0,673
+Appendix I — Google 12-Tester Community Directory & Apple Testing Communities,83,0,0,1363

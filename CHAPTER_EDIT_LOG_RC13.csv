@@ -1,0 +1,43 @@
+﻿chapter,title,focus,change
+39,Chapter 39 — Use the Excel Dashboard,Start with the actual Excel workbook,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+40,Chapter 40 — Fix Windows Tool Paths,Repair the PATH only when needed,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+41,Chapter 41 — Read Doctor Results and Logs,"Choose the correct run, not just the last message",Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+42,Chapter 42 — Prepare Your Website for Capacitor,"Treat preparation as a separate, not-yet-automated stage",Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+1,Chapter 1 — Find Your Website and See the Plan,Know which folder to select,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+2,Chapter 2 — Install Node.js,Use the official installer,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+3,Chapter 3 — Install Git and OpenSSL,Check the two Windows command windows,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+4,Chapter 4 — Open Your Project Files,"Open a folder, not a single file",Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+5,Chapter 5 — Run Doctor for the First Time,Run and read a complete check,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+6,Chapter 6 — How a Website Becomes an App,Match website behavior to phone behavior,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+7,Chapter 7 — Back Up and Check Your Project,Make a safe backup before preparing anything,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+8,Chapter 8 — Understand the dist Folder,Understand where the prepared copy goes,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+9,Chapter 9 — Find Out Why a Page Is Blank,Capture a useful blank-page error,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+10,Chapter 10 — Choose an iPhone Test,Choose a realistic iPhone testing route,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+11,Chapter 11 — Set Up Apple Developer When Needed,Confirm enrollment before doing signing work,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+12,Chapter 12 — Create Your Google Play Account,Finish account verification first,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+13,Chapter 13 — Why Apps Need Signing,Separate each kind of signing file,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+14,Chapter 14 — Get Ready for Apple Signing Keys,Treat Apple key creation as a gated technical task,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+15,Chapter 15 — Request Your Apple Certificate,Check the certificate prerequisites,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+16,Chapter 16 — Keep Your .p12 File Safe,Keep a signing file separate from your website,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+17,Chapter 17 — Set Your Apple App Identifier,Match the identifiers,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+18,Chapter 18 — Understand App Store Connect API Keys,Know what API credentials mean,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+19,Chapter 19 — Prepare Java and Android Signing,Check Java before discussing Android signing,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+20,Chapter 20 — Create a GitHub Repository,Confirm the new repository is the one you intended,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+21,Chapter 21 — Upload Your PWA to GitHub,Inspect files before sharing them,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+22,Chapter 22 — Understand Base64 and Private Files,Remember that Base64 is not encryption,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+23,Chapter 23 — Understand the Deploy Script,Know which buttons really work,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+24,Chapter 24 — Understand the iPhone Build Recipe,Treat the iPhone workflow as an unverified template,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+25,Chapter 25 — Understand the Android Build Recipe,Check Android requirements before any build,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+26,Chapter 26 — Optional Google Service Accounts,Know when this optional step is useful,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+27,Chapter 27 — Read Your GitHub Build Progress,Watch an actual job only after it is enabled,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+28,Chapter 28 — Test Your Website,Try a five-point website test,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+29,Chapter 29 — Check Features That Need a Phone,Check phone-only features as a user,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+30,Chapter 30 — Try the Android Emulator,Approach the Android emulator in stages,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+31,Chapter 31 — Try Apple TestFlight,Wait for an approved TestFlight build,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+32,Chapter 32 — Try Google Play Internal Testing,Separate internal tests from production access,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+33,Chapter 33 — Capture Real App Screenshots,Use genuine app captures for store listings,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+34,Chapter 34 — Write a Privacy Policy,Write from a simple data inventory,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+35,Chapter 35 — Prepare Your Apple Store Page,Finish Apple listing in a safe order,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+36,Chapter 36 — Prepare Your Google Play Store Page,Keep testing gates before production rollout,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+37,Chapter 37 — Look After Your App,Record what version was actually released,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
+38,Chapter 38 — Plan Google Closed Testing,Plan closed testing before the Google production step,Added specific illustrated/example-driven action and verified outcome; repaired awkward wording
