@@ -1,8 +1,0 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>My First PWA</title><meta name="theme-color" content="#234a72">
-<link rel="manifest" href="./manifest.webmanifest">
-<style>body{font:18px/1.55 system-ui,sans-serif;max-width:680px;margin:8vh auto;padding:0 22px;color:#1c344c}h1{color:#234a72}main{padding:22px;background:#f0f6ff;border-radius:14px}button{padding:12px;border-radius:8px;background:#234a72;color:white;border:0}</style></head>
-<body><main><h1>Welcome to My First PWA</h1><p>This small page is a practice project. Edit this message to make it your own.</p><button onclick="document.getElementById('message').textContent='The button works!'">Try a button</button><p id="message" aria-live="polite"></p><p>Test this page online once, then try offline.</p></main>
-<script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline helper not active:',err))); }</script>
-</body></html>
