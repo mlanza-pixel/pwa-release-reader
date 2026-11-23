@@ -1,0 +1,68 @@
+﻿section,RC14_words,RC15_words,new_words,change
+Before You Start: The Whole Story in 8 Pictures,363,363,0,No expansion; reference section
+How to Use This Book,166,166,0,No expansion; reference section
+Introduction: The Zero-Mac Manifesto & The Bakery Analogy,127,127,0,No expansion; reference section
+START HERE — From Website to PWA,27,27,0,No expansion; reference section
+Start Here 1 — I Already Have a Website,336,539,203,Expanded worked example + actual steps + troubleshooting
+Start Here 2 — Add a Manifest and Offline Helper,427,720,293,Expanded worked example + actual steps + troubleshooting
+Start Here 3 — Test Your PWA and Use GitHub,425,695,270,Expanded worked example + actual steps + troubleshooting
+PART I — Equipping the Windows Armory,29,29,0,No expansion; reference section
+Chapter 1 — Find Your Website and See the Plan,518,1062,544,Expanded worked example + actual steps + troubleshooting
+Chapter 2 — Install Node.js,491,1024,533,Expanded worked example + actual steps + troubleshooting
+Chapter 3 — Install Git and OpenSSL,513,1044,531,Expanded worked example + actual steps + troubleshooting
+Chapter 4 — Open Your Project Files,440,974,534,Expanded worked example + actual steps + troubleshooting
+Chapter 5 — Run Doctor for the First Time,557,1121,564,Expanded worked example + actual steps + troubleshooting
+PART II — Project Setup & Payload Ingestion,27,27,0,No expansion; reference section
+Chapter 6 — How a Website Becomes an App,458,992,534,Expanded worked example + actual steps + troubleshooting
+Chapter 7 — Back Up and Check Your Project,513,1010,497,Expanded worked example + actual steps + troubleshooting
+Chapter 8 — Understand the dist Folder,522,1029,507,Expanded worked example + actual steps + troubleshooting
+Chapter 9 — Find Out Why a Page Is Blank,488,1002,514,Expanded worked example + actual steps + troubleshooting
+PART III — Setting Up Developer Accounts,1476,1476,0,No expansion; reference section
+Chapter 10 — Choose an iPhone Test,485,994,509,Expanded worked example + actual steps + troubleshooting
+Chapter 11 — Set Up Apple Developer When Needed,433,926,493,Expanded worked example + actual steps + troubleshooting
+Chapter 12 — Create Your Google Play Account,436,923,487,Expanded worked example + actual steps + troubleshooting
+PART IV — Forging Cryptographic Signing Passports,37,37,0,No expansion; reference section
+Chapter 13 — Why Apps Need Signing,453,951,498,Expanded worked example + actual steps + troubleshooting
+Chapter 14 — Get Ready for Apple Signing Keys,459,950,491,Expanded worked example + actual steps + troubleshooting
+Chapter 15 — Request Your Apple Certificate,434,914,480,Expanded worked example + actual steps + troubleshooting
+Chapter 16 — Keep Your .p12 File Safe,465,950,485,Expanded worked example + actual steps + troubleshooting
+Chapter 17 — Set Your Apple App Identifier,419,893,474,Expanded worked example + actual steps + troubleshooting
+Chapter 18 — Understand App Store Connect API Keys,446,932,486,Expanded worked example + actual steps + troubleshooting
+Chapter 19 — Prepare Java and Android Signing,516,1036,520,Expanded worked example + actual steps + troubleshooting
+PART V — Cloud Automation Assembly Line,52,52,0,No expansion; reference section
+Chapter 20 — Create a GitHub Repository,481,975,494,Expanded worked example + actual steps + troubleshooting
+Chapter 21 — Upload Your PWA to GitHub,669,1178,509,Expanded worked example + actual steps + troubleshooting
+Chapter 22 — Understand Base64 and Private Files,443,936,493,Expanded worked example + actual steps + troubleshooting
+Chapter 23 — Understand the Deploy Script,471,966,495,Expanded worked example + actual steps + troubleshooting
+Chapter 24 — Understand the iPhone Build Recipe,449,931,482,Expanded worked example + actual steps + troubleshooting
+Chapter 25 — Understand the Android Build Recipe,445,940,495,Expanded worked example + actual steps + troubleshooting
+Chapter 26 — Optional Google Service Accounts,422,900,478,Expanded worked example + actual steps + troubleshooting
+Chapter 27 — Read Your GitHub Build Progress,472,960,488,Expanded worked example + actual steps + troubleshooting
+PART VI — The 5-Tier Testing & Emulation Ladder,61,61,0,No expansion; reference section
+Chapter 28 — Test Your Website,426,922,496,Expanded worked example + actual steps + troubleshooting
+Chapter 29 — Check Features That Need a Phone,428,908,480,Expanded worked example + actual steps + troubleshooting
+Chapter 30 — Try the Android Emulator,448,950,502,Expanded worked example + actual steps + troubleshooting
+Chapter 31 — Try Apple TestFlight,432,901,469,Expanded worked example + actual steps + troubleshooting
+Chapter 32 — Try Google Play Internal Testing,429,911,482,Expanded worked example + actual steps + troubleshooting
+PART VII — Storefront Listing & Launch Playbook,28,28,0,No expansion; reference section
+Chapter 33 — Capture Real App Screenshots,419,919,500,Expanded worked example + actual steps + troubleshooting
+Chapter 34 — Write a Privacy Policy,449,955,506,Expanded worked example + actual steps + troubleshooting
+Chapter 35 — Prepare Your Apple Store Page,417,897,480,Expanded worked example + actual steps + troubleshooting
+Chapter 36 — Prepare Your Google Play Store Page,414,891,477,Expanded worked example + actual steps + troubleshooting
+Chapter 37 — Look After Your App,409,881,472,Expanded worked example + actual steps + troubleshooting
+Chapter 38 — Plan Google Closed Testing,473,970,497,Expanded worked example + actual steps + troubleshooting
+PART VIII — The Windows Toolkit Cookbook,30,30,0,No expansion; reference section
+Chapter 39 — Use the Excel Dashboard,642,1151,509,Expanded worked example + actual steps + troubleshooting
+Chapter 40 — Fix Windows Tool Paths,610,1120,510,Expanded worked example + actual steps + troubleshooting
+Chapter 41 — Read Doctor Results and Logs,603,1113,510,Expanded worked example + actual steps + troubleshooting
+Chapter 42 — Prepare Your Website for Capacitor,713,1220,507,Expanded worked example + actual steps + troubleshooting
+APPENDICES,26,26,0,No expansion; reference section
+Appendix A — Plain-English Glossary,1894,1894,0,No expansion; reference section
+Appendix B — Frequently Asked Questions,4293,4293,0,No expansion; reference section
+Appendix C — Command Cheat-Sheet,1016,1016,0,No expansion; reference section
+Appendix D — Store Rejection Cheat-Sheet,949,949,0,No expansion; reference section
+Appendix E — Pre-Flight Checklist,971,971,0,No expansion; reference section
+Appendix F — Full Troubleshooting Manual,1992,1992,0,No expansion; reference section
+Appendix G — Sample Git Bash Session Transcript,1761,1761,0,No expansion; reference section
+Appendix H — Screenshot Mockup Series (Now In-Line),673,673,0,No expansion; reference section
+Appendix I — Google 12-Tester Community Directory & Apple Testing Communities,1363,1363,0,No expansion; reference section

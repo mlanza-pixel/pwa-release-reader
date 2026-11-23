@@ -1,0 +1,9 @@
+﻿Picture,Meaning,Corresponding lessons and chapters,Target section ID,Editorial purpose
+01,A working website,Start Here 1 and Chapter 1,start-here-i-already-have-a-website,Your site already has pages and pictures; first identify and protect its files.
+02,Find the recipe folder,Start Here 1 and Chapter 7,chapter-7-creating-your-project-folder-installing-capacitor,Locate index.html and make a safe working copy.
+03,Give your PWA an identity,Start Here 2 and Chapter 8,start-here-add-manifest-and-service-worker,The manifest gives the website a name and an icon for installation.
+04,Plan for interrupted internet,Start Here 2 and Chapter 9,start-here-add-manifest-and-service-worker,An optional service worker can save selected resources; it cannot make everything offline.
+05,Test your PWA at home,Start Here 3 and Chapter 28,start-here-test-your-pwa-and-share-on-github,"Use localhost, inspect the manifest and test offline behavior before upload."
+06,Save files on GitHub,Start Here 3 and Chapters 20–21,chapter-21-pushing-your-local-project-to-github,"Check credentials, upload the right files, then verify the repository."
+07,Prepare phone-app packaging,Chapters 6–9 and 42,chapter-42-from-working-website-to-prepared-phone-project,Capacitor comes after the website works.
+08,Test and consider the stores,Chapters 24–38,chapter-24-the-complete-ios-build-workflow-yaml,"Store builds, signing and review are separate later steps."
